@@ -1,0 +1,210 @@
+{
+  "config": {
+    "intro": "You are Office Bear, a cuddly little developer working for a tech company in the forest.",
+    "instructions": "You can: lookat/l something, use/u something, read/r something, talkto/t something, pickup/p something, quit or instructions",
+    "seperator": "--------------------------------------------------"
+  },
+  "start_room": "office",
+  "player":{
+    "name": "Office Bear",
+    "start_health": 90,
+    "items": {
+      "key_card": {
+        "name": "Key Card",
+        "description": "A white plastic card with a picture of your stupid face on it.  Lets you into the various doors of the building.",
+        "grabbable": "true",
+        "custom_props":{
+          "passcode": "letstaffin"
+        }
+      }
+    }
+  },
+  "rooms": {
+    "office": {
+      "name": "Office",
+      "description": "It is a place of despair.  A broken florescent tube flickers above.  A rodent chews an asian candy on a nearby desk.",
+      "items": {
+        "your_desk": {
+          "name": "Your Desk",
+          "description": "It is tired and wooden, and covered in general detritus.",
+          "container_type": "surface",
+          "items": {
+            "diary": {
+              "name": "Diary",
+              "description": "A black leatherbound book",
+              "grabbable": "true",
+              "custom_props": {
+                "text_content": "Office Bear's Diary \n\nMy Schedule:\nFuck All"
+              }
+            },
+            "pizza_slice": {
+              "name": "Pizza Slice",
+              "description": "Slightly congealed, and more than your fair share.",
+              "grabbable": "true",
+              "custom_props": {
+                "energy": 10,
+                "uses": 1,
+                "use_feedback": "It tastes delicious"
+              }
+            },
+            "asian_candy": {
+              "name": "Asian Candy",
+              "description": "A strange dusty milky sweet, wrapped in a strange edible paper.",
+              "grabbable": "true",
+              "custom_props": {
+                "energy": -10,
+                "uses": 1,
+                "use_feedback": "It tastes like utter shit.  You worry you have contracted some sort of exotic disease."
+              }
+            }
+          }
+        },
+        "door_to_corridor": {
+          "name": "Door to Corridor",
+          "description": "A blue door with a magnetic release",
+          "container_type": "attached",
+          "locked": "true",
+          "custom_props": {
+            "remotely_usable": 1,
+            "auto_locks": 1,
+            "starts_room": "corridor"
+          },
+          "items": {
+            "door_release": {
+              "name": "Door Release",
+              "description": "A worn green button",
+              "custom_props": {
+                "remotely_usable": 1,
+                "auto_locks": 1,
+                "unlocks": "office.door_to_corridor"
+              }
+            }
+          }
+        },
+        "door_to_kitchen": {
+          "name": "Door to Kitchen",
+          "description": "A dark, beckoning hole",
+          "custom_props": {
+            "starts_room": "kitchen",
+            "remotely_usable": 1
+          }
+        }
+      }
+    },
+    "corridor": {
+      "name": "Corridor",
+      "description": "Paint crumbles on the wall. A light bulb flickers above.",
+      "items": {
+        "door_to_office": {
+          "name": "Door to Office",
+          "description": "A blue door with a window. A yellowed piece of A4 paper hangs from the door at an angle.  It depicts an insipid message for any delivery men.",
+          "locked": "true",
+          "container_type": "attached",
+          "custom_props": {
+            "remotely_usable": 1,
+            "auto_locks": 1,
+            "starts_room": "office"
+          },
+          "items": {
+            "office_card_reader": {
+              "name": "Office Card Reader",
+              "description": "It unlocks the door to the office when an id card is used on it.",
+              "custom_props": {
+                "remotely_usable": 1,
+                "unlocks": "corridor.door_to_office",
+                "passcode": "letstaffin"
+              }
+            }
+          }
+        },
+        "door_to_kitchen":{
+          "name": "Door to Kitchen",
+          "description": "Another blue door with a window.  There is little activity beyond.",
+          "locked": "true",
+          "container_type": "attached",
+          "custom_props":{
+            "remotely_usable": 1,
+            "auto_locks": 1,
+            "starts_room": "kitchen"
+          },
+          "items": {
+            "kitchen_card_reader": {
+              "name": "Kitchen Card Reader",
+              "description": "It unlocks the door to the kitchen when an id card is used on it.",
+              "custom_props": {
+                "remotely_usable": 1,
+                "unlocks": "corridor.door_to_kitchen",
+                "passcode": "letstaffin"
+              }
+            }
+          }
+        }
+      }
+    },
+    "kitchen": {
+      "name": "Kitchen",
+      "description": "It is poorly laid out. Anyone using the kettle blocks access to the fridge and the microwave. A window reveals the stunning vista of a brick wall.  It is apparently cake day.",
+      "items": {
+        "door_to_office": {
+          "name":"Door to Office",
+          "description": "A gloomy doorway. Someone has decorated it with supposedly cool album covers.",
+          "custom_props":{
+            "starts_room": "office",
+            "remotely_usable" : 1
+          }
+        },
+        "door_to_corridor" : {
+          "name": "Door to Corridor",
+          "description": "Standard issue blue door.  Inexplicably has an image of a granny on it.",
+          "container_type": "attached",
+          "locked": "true",
+          "custom_props":{
+            "starts_room": "corridor",
+            "remotely_usable": 1,
+            "auto_locks": 1
+          },
+          "items": {
+            "door_release": {
+              "name":"Door Release",
+              "description": "A worn green button",
+              "custom_props": {
+                "remotely_usable": 1,
+                "unlocks": "kitchen.door_to_corridor"
+              }
+            }
+          }
+        },
+        "carrot_cake": {
+          "name": "Carrot Cake",
+          "description": "A normal looking carrot cake, half eaten already.",
+          "grabbable": "true",
+          "custom_props": {
+            "energy": 10,
+            "uses": 4,
+            "use_feedback": "Mmmmmm, quite delicious. Not at all healthy, but delicious."
+          }
+        },
+        "yellow_cake": {
+          "name": "Yellow Cake",
+          "description": "A strangely coloured cake. It's flavour is a mystery.",
+          "grabbable": "true",
+          "custom_props": {
+            "energy": 5,
+            "uses": 8,
+            "use_feedback": "Bizarrely, the yellow cake is chocolate flavour inside.  Yum?"
+          }
+        },
+        "fruity_cake": {
+          "name": "Fruity Cake",
+          "description": "A sickly looking cake, adorned with fruits and gelatin, like from some nightmare of a 70s dinner party.",
+          "grabbable": "true",
+          "custom_props": {
+            "energy": 2,
+            "uses": 8,
+            "use_feedback": "The gelatin is slightly sickening, but at least the fruit is some sort of source of vitamin C."
+          }
+        }
+      }
+    }
+  }
+}
